@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Game 2</title>
+</head>
+
+<body>
+    <hr>
+    <h1>Second Exercice : 5 round game</h1>
+    <button id="button">Click to launch the 5-round game</button>
+    <h2>5 Round game results</h2>
+    <div class="tableround" id=round1>Round 1</div>
+    <div class="tableround" id=round2>Round 2</div>
+    <div class="tableround" id=round3>Round 3</div>
+    <div class="tableround" id=round4>Round 4</div>
+    <div class="tableround" id=round5>Round 5</div>
+    <div class="tableround" id=roundresult>Final Result</div>
+
+
+
+</body>
+
+<script>
+    // Elements linked to HTML
+    const playerSelection = document.getElementById('playerChoice');
+    const launch5game = document.getElementById('button');
+    const roundresult = document.getElementById('roundresult');
+
+    // HTML BUTTON LAUNCH
+    launch5game.addEventListener('click', game); //Why don't I add "()" after the function game ? When I try it doesn't work.
+
+    // VARIABLES
+    let playerScore = 0; //if positive player win, if negative play looses
+    let totalScore = 0;
+    const round = {}; // round array for displaying the 5 rounds results
+
+
+    //Computer's choice
+    const computerSelection = computerPlay();
+    function computerPlay() {
+        let x = Math.random();
+        if (x < 1 / 3) { return "Rock"; }
+        else if (x < 2 / 3) { return "Paper"; }
+        else { return "Scissors" };
+    }
+
+
+    // GAME Function, is there a better way? Such as creating rules (Rock>Paper but <Scissors, etc), a kind of matrix
+    function playRound(playerSelection, computerSelection) {
+        playerScore = 0;
+        if ((playerSelection == 'Rock') && (computerSelection == 'Paper')) { playerScore = playerScore - 3; return playerSelection; } //Why return doesn't appear on the console ?
+        else if ((playerSelection == 'Rock') && (computerSelection == 'Scissors')) { playerScore = playerScore + 3; return playerSelection; }
+        else if (playerSelection == computerSelection) { return "EQUALITY"; } // No matter what equality is, paper, rock or scissors
+        else if ((playerSelection == 'Paper') && (computerSelection == 'Rock')) { playerScore = playerScore + 3; return playerSelection; }
+        else if ((playerSelection == 'Paper') && (computerSelection == 'Scissors')) { playerScore = playerScore - 3; return playerSelection; }
+        else if ((playerSelection == 'Scissors') && (computerSelection == 'Paper')) { playerScore = playerScore + 3; return playerSelection; }
+        else if ((playerSelection == 'Scissors') && (computerSelection == 'Rock')) { playerScore = playerScore - 3; return playerSelection; }
+    }
+
+    // 5 Round game function
+    function game(playerSelection, computerSelection) {
+        for (i = 1; i < 6; i++) {
+            playerSelection = prompt(`Player's choice ${i}`, '');
+            computerSelection = computerPlay();
+            playRound(playerSelection, computerSelection);
+            totalScore = totalScore + playerScore;
+            round[i] = document.getElementById(`round${i}`);
+            round[i].innerHTML = `Round ${i} : Player's choice = <a class="choice">${playerSelection}</a>, computer's choice = <a class="choice">${computerSelection}</a>, Final score <a class="choice">${totalScore}</a>`;
+        }
+
+        //If function to display final result in the last div
+        if (totalScore > 0) {
+            roundresult.innerHTML = `The final winner is YOU`;
+        } else if (totalScore == 0) {
+            roundresult.innerHTML = `PERFECT EQUALITY`;
+        } else {
+            roundresult.innerHTML = `You loose, the computer won, GAME OVER`;
+        }
+    }
+
+
+</script>
+
+</html>

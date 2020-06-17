@@ -4,15 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" href="style.css">
-
-    <title>THE GAME</title>
+    <title>Game 1</title>
 </head>
 
 <body>
 
- 
     <hr>
     <h1>First Exercice : 1 round game</h1>
     <select id="playerChoice">
@@ -38,40 +35,13 @@
         </div>
     </div>
 
-    <hr>
-    <h1>Second Exercice : 5 round game</h1>
-    <button id="button">Click to launch the 5-round game</button>
-    <h2>5 Round game results</h2>
-    <div class="tableround" id=round1>Round 1</div>
-    <div class="tableround" id=round2>Round 2</div>
-    <div class="tableround" id=round3>Round 3</div>
-    <div class="tableround" id=round4>Round 4</div>
-    <div class="tableround" id=round5>Round 5</div>
-    <div class="tableround" id=roundresult>Final Result</div>
-    <script>
 
+    <script>
         // Elements linked to HTML
         const playerSelection = document.getElementById('playerChoice');
         const txtPlayer = document.getElementById('player');
         const txtComputer = document.getElementById('computer');
         const txtWinner = document.getElementById('winner');
-        const launch5game = document.getElementById('button');
-        let playerScore = 0; //if positive player win, if negative play looses
-        let totalScore = 0;
-        let round = {}; // round array for displaying the 5 rounds results
-
-        launch5game.addEventListener('click', game); //Why don't I add "()" after the function game ? When I try it doesn't work.
-        /*
-                const round1 = document.getElementById('round1');
-                const round2 = document.getElementById('round2');
-                const round3 = document.getElementById('round3');
-                const round4 = document.getElementById('round4');
-                const round5 = document.getElementById('round5'); */
-        const roundresult = document.getElementById('roundresult');
-
-
-
-
 
         // Generate computer's choice + Update HTML Text
         const computerSelection = computerPlay();
@@ -114,27 +84,6 @@
         console.log(`Computer's choice : ${computerSelection}`);
 
 
-        function game(playerSelection, computerSelection) {
-
-
-            for (i = 1; i < 6; i++) {
-                playerSelection = prompt(`Player's choice ${i}`, '');
-                computerSelection = computerPlay();
-                playRound(playerSelection, computerSelection);
-                totalScore = totalScore + playerScore;
-                round[i] = document.getElementById(`round${i}`);
-                round[i].innerHTML = `Round ${i} : Player's choice = <a class="choice">${playerSelection}</a>, computer's choice = <a class="choice">${computerSelection}</a>, Final score <a class="choice">${totalScore}</a>`;
-
-            }
-
-            if (totalScore > 0) {
-                roundresult.innerHTML = `The final winner is YOU`;
-            } else if (totalScore == 0) {
-                roundresult.innerHTML = `PERFECT EQUALITY`;
-            } else {
-                roundresult.innerHTML = `You loose, the computer won, GAME OVER`;
-            }
-        }
 
     </script>
 
