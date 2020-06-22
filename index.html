@@ -11,130 +11,18 @@
 </head>
 
 <body>
-
- 
-    <hr>
-    <h1>First Exercice : 1 round game</h1>
-    <select id="playerChoice">
-        <option value="">---- Make a choice ----</option>
-        <option value="Paper">Paper</option>
-        <option value="Rock">Rock</option>
-        <option value="Scissors">Scissors</option>
-    </select>
-    <div id="flexbox">
-        <div id="box-1">
-            <h2>Player Choice</h2>
-            <div class="stylise" id=player>Choose</div>
-        </div>
-
-        <div id="box-2">
-            <h2>Computer Choice</h2>
-            <div class="stylise" id=computer></div>
-        </div>
-
-        <div id="box-3">
-            <h2>WINNER</h2>
-            <div class="stylise" id=winner>Play before</div>
-        </div>
-    </div>
-
-    <hr>
-    <h1>Second Exercice : 5 round game</h1>
-    <button id="button">Click to launch the 5-round game</button>
-    <h2>5 Round game results</h2>
-    <div class="tableround" id=round1>Round 1</div>
-    <div class="tableround" id=round2>Round 2</div>
-    <div class="tableround" id=round3>Round 3</div>
-    <div class="tableround" id=round4>Round 4</div>
-    <div class="tableround" id=round5>Round 5</div>
-    <div class="tableround" id=roundresult>Final Result</div>
+    <p class="admitted"></p>
+    <p class="refused"></p>
     <script>
 
-        // Elements linked to HTML
-        const playerSelection = document.getElementById('playerChoice');
-        const txtPlayer = document.getElementById('player');
-        const txtComputer = document.getElementById('computer');
-        const txtWinner = document.getElementById('winner');
-        const launch5game = document.getElementById('button');
-        let playerScore = 0; //if positive player win, if negative play looses
-        let totalScore = 0;
-        let round = {}; // round array for displaying the 5 rounds results
 
-        launch5game.addEventListener('click', game); //Why don't I add "()" after the function game ? When I try it doesn't work.
-        /*
-                const round1 = document.getElementById('round1');
-                const round2 = document.getElementById('round2');
-                const round3 = document.getElementById('round3');
-                const round4 = document.getElementById('round4');
-                const round5 = document.getElementById('round5'); */
-        const roundresult = document.getElementById('roundresult');
-
-
-
-
-
-        // Generate computer's choice + Update HTML Text
-        const computerSelection = computerPlay();
-        txtComputer.textContent = computerSelection;
-
-        function computerPlay() {
-            let x = Math.random();
-            if (x < 1 / 3) { return "Rock"; }
-            else if (x < 2 / 3) { return "Paper"; }
-            else { return "Scissors" };
+        for (let i = 0; i <= 100;) {
+            i = prompt('donner un chiffre > 100')
         }
 
-        // Generate player's choice by selecting in the list. 
-        playerSelection.addEventListener('change', updateChoice);
-
-        /* This function for 3 things
-        1. for updating the HTML content
-        2. to convert the choice from the list in a value for the function playRound to work
-        3. for displaying in the console player's choice
-        */
-        function updateChoice() {
-            txtPlayer.textContent = playerSelection.value;
-            playRound(playerSelection.value, computerSelection);
-            console.log(`Player's choice: ${playerSelection.value}`);
-        }
-
-        // GAME Function, is there a better way? Such as creating rules (Rock>Paper but <Scissors, etc), a kind of matrix
-        function playRound(playerSelection, computerSelection) {
-            playerScore = 0;
-            if ((playerSelection == 'Rock') && (computerSelection == 'Paper')) { txtWinner.innerHTML = `You loose, because <a class="choice">Paper</a> beats <a class="choice">Rock</a>`; playerScore = playerScore - 3; return playerSelection; } //Why return doesn't appear on the console ?
-            else if ((playerSelection == 'Rock') && (computerSelection == 'Scissors')) { txtWinner.innerHTML = `You win, because <a class="choice">Rock</a> beats <a class="choice">Scissors</a>`; playerScore = playerScore + 3; return playerSelection; }
-            else if (playerSelection == computerSelection) { txtWinner.innerHTML = `Equality, because you chose <a class="choice">${txtPlayer.textContent}</a> and the computer as well`; return "EQUALITY"; } // No matter what equality is, paper, rock or scissors
-            else if ((playerSelection == 'Paper') && (computerSelection == 'Rock')) { txtWinner.innerHTML = `You win, because <a class="choice">Paper</a> beats <a class="choice">Rock</a>`; playerScore = playerScore + 3; return playerSelection; }
-            else if ((playerSelection == 'Paper') && (computerSelection == 'Scissors')) { txtWinner.innerHTML = `You loose, because <a class="choice">Scissors</a> beats <a class="choice">Paper</a>`; playerScore = playerScore - 3; return playerSelection; }
-            else if ((playerSelection == 'Scissors') && (computerSelection == 'Paper')) { txtWinner.innerHTML = `You win, because <a class="choice">Scissors</a> beats <a class="choice">Paper</a>`; playerScore = playerScore + 3; return playerSelection; }
-            else if ((playerSelection == 'Scissors') && (computerSelection == 'Rock')) { txtWinner.innerHTML = `You loose, because <a class="choice">Rock</a> beats <a class="choice">Scissors</a>`; playerScore = playerScore - 3; return playerSelection; }
-        }
-
-        // Displays Computer's choice in the console. Same thing for the player in a function above
-        console.log(`Computer's choice : ${computerSelection}`);
 
 
-        function game(playerSelection, computerSelection) {
 
-
-            for (i = 1; i < 6; i++) {
-                playerSelection = prompt(`Player's choice ${i}`, '');
-                computerSelection = computerPlay();
-                playRound(playerSelection, computerSelection);
-                totalScore = totalScore + playerScore;
-                round[i] = document.getElementById(`round${i}`);
-                round[i].innerHTML = `Round ${i} : Player's choice = <a class="choice">${playerSelection}</a>, computer's choice = <a class="choice">${computerSelection}</a>, Final score <a class="choice">${totalScore}</a>`;
-
-            }
-
-            if (totalScore > 0) {
-                roundresult.innerHTML = `The final winner is YOU`;
-            } else if (totalScore == 0) {
-                roundresult.innerHTML = `PERFECT EQUALITY`;
-            } else {
-                roundresult.innerHTML = `You loose, the computer won, GAME OVER`;
-            }
-        }
 
     </script>
 

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Sedgwick+Ave+Display&display=swap" rel="stylesheet">
+    <title>Game 1</title>
+</head>
+
+<body>
+
+    <hr>
+    <h1>First Exercice : 1 round game</h1>
+    <div id=buttons>
+        <button data-choice="1" id="rock">Rock</button>
+        <button data-choice="2" id="paper">Paper</button>
+        <button data-choice="3" id="scissors">Scissors</button>
+    </div>
+    <hr>
+
+    <div class="flexbox">
+        <div class="stylise" id="playerbox"></div>
+        <div class="stylise" id="computerbox"></div>
+    </div>
+
+
+    <hr>
+    <div class="flexbox">
+        <div id="box-1">
+            <h2>Player Choice</h2>
+            <div class="stylise" id=player>Choose</div>
+        </div>
+
+        <div id="box-2">
+            <h2>Computer Choice</h2>
+            <div class="stylise" id=computer></div>
+        </div>
+
+        <div id="box-3">
+            <h2>WINNER</h2>
+            <div class="stylise" id=winner>Play before</div>
+        </div>
+    </div>
+
+
+    <script>
+        // Elements linked to HTML
+        let playerSelection;
+        let computerSelection;
+        const txtPlayer = document.getElementById('player');
+        const txtComputer = document.getElementById('computer');
+        const txtWinner = document.getElementById('winner');
+
+        const playerChoice = document.querySelectorAll('button');
+        playerChoice.forEach(determineChoice);
+
+        function determineChoice(item, index, arr) {
+            item.addEventListener('click', () => { updatePlayerChoice(item.textContent) });
+        }
+
+        function updatePlayerChoice(playerSelection) {
+            txtPlayer.textContent = playerSelection;
+            playRound(playerSelection, computerSelection);
+            computerSelection = computerPlay();
+            txtComputer.textContent = computerSelection;
+        }
+
+        function computerPlay() {
+            let x = Math.random();
+            if (x < 1 / 3) { return "Rock"; }
+            else if (x < 2 / 3) { return "Paper"; }
+            else { return "Scissors" };
+        }
+
+        let playerScore = 0;
+        let computerScore = 0;
+        const playerScoreHTML = document.getElementById('playerbox');
+        const computerScoreHTML = document.getElementById('computerbox');
+        playerScoreHTML.textContent = playerScore;
+        computerScoreHTML.textContent = computerScore;
+
+
+        // GAME Function, is there a better way? Such as creating rules (Rock>Paper but <Scissors, etc), a kind of matrix
+        function playRound(playerSelection, computerSelection) {
+            if ((playerSelection == 'Rock') && (computerSelection == 'Paper')) { txtWinner.innerHTML = `You loose, because <a class="choice">Paper</a> beats <a class="choice">Rock</a>`; computerScore++; }
+            else if ((playerSelection == 'Rock') && (computerSelection == 'Scissors')) { txtWinner.innerHTML = `You win, because <a class="choice">Rock</a> beats <a class="choice">Scissors</a>`; playerScore++; }
+            else if (playerSelection == computerSelection) { txtWinner.innerHTML = `Equality, because you chose <a class="choice">${txtPlayer.textContent}</a> and the computer as well`; } // No matter what equality is, paper, rock or scissors
+            else if ((playerSelection == 'Paper') && (computerSelection == 'Rock')) { txtWinner.innerHTML = `You win, because <a class="choice">Paper</a> beats <a class="choice">Rock</a>`; playerScore++; }
+            else if ((playerSelection == 'Paper') && (computerSelection == 'Scissors')) { txtWinner.innerHTML = `You loose, because <a class="choice">Scissors</a> beats <a class="choice">Paper</a>`; computerScore++; }
+            else if ((playerSelection == 'Scissors') && (computerSelection == 'Paper')) { txtWinner.innerHTML = `You win, because <a class="choice">Scissors</a> beats <a class="choice">Paper</a>`; playerScore++; }
+            else if ((playerSelection == 'Scissors') && (computerSelection == 'Rock')) { txtWinner.innerHTML = `You loose, because <a class="choice">Rock</a> beats <a class="choice">Scissors</a>`; computerScore++; }
+            playerScoreHTML.textContent = playerScore;
+            computerScoreHTML.textContent = computerScore;
+
+
+            if (playerScore == 5) { alert("YOU WIN") }
+            else if (computerScore == 5) { alert("YOU LOOSE") };
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>

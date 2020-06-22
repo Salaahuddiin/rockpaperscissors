@@ -17,7 +17,29 @@ div.stylise {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
-#flexbox {
+#buttons button {
+    background-color:rgb(88, 188, 255);
+    padding: 20px;
+    margin: 20px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgb(19, 17, 119);
+    border-radius: 10px;
+    font-family: 'Sedgwick Ave Display', cursive;
+    font-size: 50px;
+    width: 250px;
+}
+
+
+#paper {
+    align-self:flex-end;
+    background-color: beige !important;
+    justify-content: flex-end;
+   
+}
+
+
+.flexbox {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -66,19 +88,13 @@ div.stylise {
     background-color: rgb(2, 131, 218);
 }
 
-select {
-    font-size: 30px;
-    background-color: skyblue;
+#buttons {
+    font-size: 90px;
     margin: 20px;
     padding: 20px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 400px;
-    border-style: solid;
-    border-color: blue;
-    border-width: 2px;
-    border-radius: 45px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 
 .choice {
@@ -112,6 +128,10 @@ h2 {
 
 }
 
+hr {
+    border: 5px solid blue;
+    border-radius: 5px;
+  }
 
 
 @media only screen and (max-width: 600px) {
